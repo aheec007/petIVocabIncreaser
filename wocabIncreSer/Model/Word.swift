@@ -22,6 +22,12 @@ let randomNouns = [
     "cork", "mouse pad"
 ]
 
+enum RareType: Int {
+    case often = 0
+    case normal
+    case rare
+}
+
 /// An individual item. Part of an `ItemGroup`.
 final class Word: Object, ObjectKeyIdentifiable {
     /// The unique ID of the Item. `primaryKey: true` declares the
@@ -43,6 +49,16 @@ final class Word: Object, ObjectKeyIdentifiable {
     
     @Persisted var rusValue: String = "Какое-то слово"
     @Persisted var engValue: String = "Some word"
+    
+    @Persisted var rareTypeValue: Int = RareType.normal.rawValue
+    var rypeValue: RareType {
+        get {
+            RareType(rawValue: rareTypeValue) ?? .normal
+        }
+        set {
+            rareTypeValue = newValue.rawValue
+        }
+    }
     
     var name: String {
         "\(rusValue) -> \(engValue)"

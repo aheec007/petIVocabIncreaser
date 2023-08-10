@@ -12,6 +12,23 @@ import RealmSwift
 /// For now, it always displays the LocalOnlyContentView.
 @main
 struct ContentView: SwiftUI.App {
+    
+    init(){
+        let config = Realm.Configuration(
+             schemaVersion: 3,
+                migrationBlock: { migration, oldSchemaVersion in
+                if (oldSchemaVersion < 1) {
+
+//                    migration.enumerateObjects(ofType: Word.className()) { _, newObject in
+//                           newObject!["rareType"] = nil
+//
+//                    }
+                }
+        })
+        Realm.Configuration.defaultConfiguration = config
+        _ = try!Realm()
+    }
+    
     var body: some Scene {
         WindowGroup {
             LocalOnlyContentView()
@@ -58,7 +75,7 @@ struct ItemsView: View {
                     .onMove(perform: $itemGroup.items.move)
                 }
                 .listStyle(GroupedListStyle())
-                    .navigationBarTitle("Items", displayMode: .large)
+                .navigationBarTitle("Words \(itemGroup.items.count)", displayMode: .large)
                     .navigationBarBackButtonHidden(true)
                     .navigationBarItems(
                         leading: self.leadingBarButton,
@@ -77,15 +94,6 @@ struct ItemsView: View {
                     } label: {
                         Text("New Word")
                     }
-                     
-                    
-//                    Spacer()
-//                    Button(action: {
-//                        // The bound collection automatically
-//                        // handles write transactions, so we can
-//                        // append directly to it.
-//                        $itemGroup.items.append(Item())
-//                    }) { Image(systemName: "plus") }
                 }.padding()
             }
         }

@@ -3,4 +3,70 @@
    uuid = "A05C57F2-A6EA-49C1-B3B6-751A34ABB581"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E4713E33-F367-42E4-883F-0E5A17E249C4"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "wocabIncreSer/wocabIncreSerApp.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "22"
+            endingLineNumber = "22"
+            landmarkName = "init()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "E4713E33-F367-42E4-883F-0E5A17E249C4 - 1b28b048058707f3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Sendable (__C.RLMMigration, Swift.UInt64) -&gt; () in wocabIncreSer.ContentView.init() -&gt; wocabIncreSer.ContentView"
+                  moduleName = "wocabIncreSer"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/alex/petIVocabIncreaser/wocabIncreSer/wocabIncreSerApp.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "24"
+                  endingLineNumber = "24"
+                  offsetFromSymbolStart = "56">
+               </Location>
+               <Location
+                  uuid = "E4713E33-F367-42E4-883F-0E5A17E249C4 - 77569869256bd856"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;RealmSwift.DynamicObject&gt;, Swift.Optional&lt;RealmSwift.DynamicObject&gt;) -&gt; () in closure #1 @Sendable (__C.RLMMigration, Swift.UInt64) -&gt; () in wocabIncreSer.ContentView.init() -&gt; wocabIncreSer.ContentView"
+                  moduleName = "wocabIncreSer"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/alex/petIVocabIncreaser/wocabIncreSer/wocabIncreSerApp.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "25"
+                  endingLineNumber = "25"
+                  offsetFromSymbolStart = "80">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B82527B4-E9FD-41CE-8DEC-244D4A47DA46"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "wocabIncreSer/wocabIncreSerApp.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "20"
+            endingLineNumber = "20"
+            landmarkName = "init()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>
