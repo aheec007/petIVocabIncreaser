@@ -22,8 +22,16 @@ struct WordCardView: View {
     
     var body: some View {
         VStack(alignment: .center) {
-            Text(word.engValue)
-                .padding(.bottom, 10)
+            HStack(alignment: .center) {
+                Text(word.engValue)
+                    
+                Rectangle()
+                    .fill(word.rareType.color)
+                    .cornerRadius(6)
+                    .frame(width: 15, height: 15)
+            }
+            .padding(.bottom, 10)
+            
             if isNeedTranslate {
                 Text(word.rusValue)
             }
