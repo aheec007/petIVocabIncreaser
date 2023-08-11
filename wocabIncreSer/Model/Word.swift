@@ -7,6 +7,7 @@
 
 import Foundation
 import RealmSwift
+import SwiftUI
 
 /// Random adjectives for more interesting demo item names
 let randomAdjectives = [
@@ -26,6 +27,14 @@ enum RareType: Int {
     case often = 0
     case normal
     case rare
+    
+    var color: Color {
+        switch self {
+        case .often: return .green
+        case .normal: return .yellow
+        case .rare: return .red
+        }
+    }
 }
 
 /// An individual item. Part of an `ItemGroup`.
@@ -51,7 +60,7 @@ final class Word: Object, ObjectKeyIdentifiable {
     @Persisted var engValue: String = "Some word"
     
     @Persisted var rareTypeValue: Int = RareType.normal.rawValue
-    var rypeValue: RareType {
+    var rareType: RareType {
         get {
             RareType(rawValue: rareTypeValue) ?? .normal
         }

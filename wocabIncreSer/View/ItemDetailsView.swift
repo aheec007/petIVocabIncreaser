@@ -18,6 +18,7 @@ struct ItemDetailsView: View {
     
     @State private var rusName: String = ""
     @State private var engName: String = ""
+    @State private var rareType: RareType = .normal
     
     init(_ group: ItemGroup, word: Word?) {
         self.group = group
@@ -25,60 +26,113 @@ struct ItemDetailsView: View {
         
         self._rusName = State(initialValue: word?.rusValue ?? "")
         self._engName = State(initialValue: word?.engValue ?? "")
-
+        self._rareType = State(initialValue: word?.rareType ?? .normal)
     }
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Введите слова на русском:")
-                .foregroundColor(.gray)
+            HStack {
+                Text("Введите слова на русском:")
+                    .foregroundColor(.gray)
+                Spacer()
+                Rectangle()
+                    .fill(rareType.color)
+                    .cornerRadius(6)
+                    .frame(width: 30, height: 30)
+            }
+            .navigationBarTitle("Edit word", displayMode: .inline)
+                
             // Accept a new name
             TextField("New name", text:  $rusName)
             
             Text("Введите перевод")
                 .foregroundColor(.gray)
             TextField("New translate", text: $engName)
-            Spacer()
             
+            HStack(alignment: .center) {
+                Button(){
+                    rareType = .often
+                } label: {
+                    Rectangle()
+                        .fill(.green)
+                        .cornerRadius(6)
+                        .frame(width: 30, height: 30)
+                }
+                
+                Button(){
+                    rareType = .normal
+                } label: {
+                    Rectangle()
+                        .fill(.yellow)
+                        .cornerRadius(6)
+                        .frame(width: 30, height: 30)
+                }
+                
+                Button(){
+                    rareType = .rare
+                } label: {
+                    Rectangle()
+                        .fill(.red)
+                        .cornerRadius(6)
+                        .frame(width: 30, height: 30)
+                }
+                
+            }
+            .padding(.top, 10)
             
-            Button("Готово") {
-                if let word = word {
-                    let id = word._id
-                    if let realm = try? Realm(), let selfItem = realm.object(ofType: Word.self, forPrimaryKey: id) {
-                        
-                        do {
-                            try realm.write({
-                                selfItem.rusValue = rusName
-                                selfItem.engValue = engName
-                            })
+            GeometryReader { geometry in
+                Button(action: {
+                    if let word = word {
+                        let id = word._id
+                        if let realm = try? Realm(), let selfItem = realm.object(ofType: Word.self, forPrimaryKey: id) {
                             
-                        } catch {
-                            print(error)
+                            do {
+                                try realm.write({
+                                    selfItem.rusValue = rusName
+                                    selfItem.engValue = engName
+                                    selfItem.rareType = rareType
+                                })
+                                
+                            } catch {
+                                print(error)
+                            }
+                        }
+                    } else {
+                        let id = group._id
+                        if let realm = try? Realm(), let selfItem = realm.object(ofType: ItemGroup.self, forPrimaryKey: id) {
+                            
+                            do {
+                                try realm.write({
+                                    let word = Word()
+                                    word.rusValue = rusName
+                                    word.engValue = engName
+                                    word.rareType = rareType
+                                    selfItem.items.append(word)
+                                })
+                                
+                            } catch {
+                                print(error)
+                            }
                         }
                     }
                     
-                } else {
-                    let id = group._id
-                    if let realm = try? Realm(), let selfItem = realm.object(ofType: ItemGroup.self, forPrimaryKey: id) {
-                        
-                        do {
-                            try realm.write({
-                                let word = Word()
-                                word.rusValue = rusName
-                                word.engValue = engName
-                                selfItem.items.append(word)
-                            })
-                            
-                        } catch {
-                            print(error)
-                        }
-                        
-                    }
+                    presentationMode.wrappedValue.dismiss()
+                }){
+                    Text("Save")
+                        .frame(
+                            minWidth: (geometry.size.width / 2) - 25,
+                            maxWidth: .infinity, minHeight: 44
+                        )
+                        .font(Font.subheadline.weight(.bold))
+                        .background(.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(12)
                 }
-                
-                presentationMode.wrappedValue.dismiss()
             }
             
+            .padding(.top, 30)
+            
+            Spacer()
         }.padding()
     }
 }

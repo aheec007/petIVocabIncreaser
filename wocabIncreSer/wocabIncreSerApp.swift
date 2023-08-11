@@ -75,7 +75,7 @@ struct ItemsView: View {
                     .onMove(perform: $itemGroup.items.move)
                 }
                 .listStyle(GroupedListStyle())
-                .navigationBarTitle("Words \(itemGroup.items.count)", displayMode: .large)
+                .navigationBarTitle("Words \(itemGroup.items.count)", displayMode: .inline)
                     .navigationBarBackButtonHidden(true)
                     .navigationBarItems(
                         leading: self.leadingBarButton,
@@ -107,10 +107,17 @@ struct ItemRow: View {
     var body: some View {
         // You can click an item in the list to navigate to an edit details screen.
         NavigationLink(destination: ItemDetailsView(group, word: item)) {
-            Text(item.name)
-            if item.isFavorite {
-                // If the user "favorited" the item, display a heart icon
-                Image(systemName: "heart.fill")
+            HStack {
+                Text(item.name)
+                if item.isFavorite {
+                    // If the user "favorited" the item, display a heart icon
+                    Image(systemName: "heart.fill")
+                }
+                Spacer()
+                Rectangle()
+                    .fill(item.rareType.color)
+                    .cornerRadius(6)
+                    .frame(width: 20, height: 20)
             }
         }
     }
