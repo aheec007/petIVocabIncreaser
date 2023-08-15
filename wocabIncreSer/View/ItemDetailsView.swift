@@ -129,7 +129,6 @@ struct ItemDetailsView: View {
                         .cornerRadius(12)
                 }
             }
-            
             .padding(.top, 30)
             
             Spacer()

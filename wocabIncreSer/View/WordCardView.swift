@@ -35,23 +35,44 @@ struct WordCardView: View {
             if isNeedTranslate {
                 Text(word.rusValue)
             }
+            
             Spacer()
-            HStack{
-                Button("Translate") {
-                    isNeedTranslate.toggle()
-                }
-                .padding(.leading, 20)
                 
-                Spacer()
-                
-                Button("Next") {
-                    word = group.items.randomElement() ?? Word()
-                    isNeedTranslate = false
-                }
-                .padding(.trailing, 20)
+            Button(action: {
+                isNeedTranslate.toggle()
+            }) {
+                Text("Translate")
+                    .frame(minWidth: 0, maxWidth: .infinity)
+                    .foregroundColor(.white)
+           }
+           .overlay(
+              RoundedRectangle(cornerRadius: 12)
+                   .stroke(Color.black, lineWidth: 1)
+                   .frame(minHeight: 46, maxHeight: 47)
+           )
+           .frame(minHeight: 46, maxHeight: 46)
+           .background(Color.red)
+           .cornerRadius(12)
+            
+            Button(action: {
+                word = group.items.randomElement() ?? Word()
+                isNeedTranslate = false
+            }) {
+                Text("Next")
+                    .frame(minWidth: 0, maxWidth: .infinity)
+                    .foregroundColor(.white)
             }
+            .overlay(
+               RoundedRectangle(cornerRadius: 12)
+                    .stroke(Color.black, lineWidth: 1)
+                    .frame(minHeight: 46, maxHeight: 47)
+            )
+            .frame(minHeight: 46, maxHeight: 46)
+            .background(Color.green)
+            .cornerRadius(12)
 
         }
+        .padding()
     }
 }
 
