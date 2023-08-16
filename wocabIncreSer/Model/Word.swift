@@ -73,3 +73,20 @@ final class Word: Object, ObjectKeyIdentifiable {
         "\(rusValue) -> \(engValue)"
     }
 }
+
+extension Word {
+    func save(_ block: (Word)->()) {
+        let id = _id
+        if let realm = try? Realm(), let selfItem = realm.object(ofType: Word.self, forPrimaryKey: id) {
+            
+            do {
+                try realm.write({
+                    block(selfItem)
+                })
+                
+            } catch {
+                print(error)
+            }
+        }
+    }
+}

@@ -83,36 +83,18 @@ struct ItemDetailsView: View {
             GeometryReader { geometry in
                 Button(action: {
                     if let word = word {
-                        let id = word._id
-                        if let realm = try? Realm(), let selfItem = realm.object(ofType: Word.self, forPrimaryKey: id) {
-                            
-                            do {
-                                try realm.write({
-                                    selfItem.rusValue = rusName
-                                    selfItem.engValue = engName
-                                    selfItem.rareType = rareType
-                                })
-                                
-                            } catch {
-                                print(error)
-                            }
+                        word.save {
+                            $0.rusValue = rusName
+                            $0.engValue = engName
+                            $0.rareType = rareType
                         }
                     } else {
-                        let id = group._id
-                        if let realm = try? Realm(), let selfItem = realm.object(ofType: ItemGroup.self, forPrimaryKey: id) {
-                            
-                            do {
-                                try realm.write({
-                                    let word = Word()
-                                    word.rusValue = rusName
-                                    word.engValue = engName
-                                    word.rareType = rareType
-                                    selfItem.items.append(word)
-                                })
-                                
-                            } catch {
-                                print(error)
-                            }
+                        group.save {
+                            let word = Word()
+                            word.rusValue = rusName
+                            word.engValue = engName
+                            word.rareType = rareType
+                            $0.items.append(word)
                         }
                     }
                     

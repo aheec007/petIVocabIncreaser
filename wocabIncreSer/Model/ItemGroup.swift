@@ -20,3 +20,20 @@ final class ItemGroup: Object, ObjectKeyIdentifiable {
     /// Add this to both the `ItemGroup` and the `Item` objects so you can read and write the linked objects.
     @Persisted var ownerId = ""
 }
+
+extension ItemGroup {
+    func save(_ block: (ItemGroup)->()) {
+        let id = _id
+        if let realm = try? Realm(), let selfItem = realm.object(ofType: ItemGroup.self, forPrimaryKey: id) {
+            
+            do {
+                try realm.write({
+                    block(selfItem)
+                })
+                
+            } catch {
+                print(error)
+            }
+        }
+    }
+}
