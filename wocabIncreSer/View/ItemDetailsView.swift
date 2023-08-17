@@ -87,6 +87,7 @@ struct ItemDetailsView: View {
                             $0.rusValue = rusName
                             $0.engValue = engName
                             $0.rareType = rareType
+                            $0.createDate = Date()
                         }
                     } else {
                         group.save {
@@ -94,6 +95,7 @@ struct ItemDetailsView: View {
                             word.rusValue = rusName
                             word.engValue = engName
                             word.rareType = rareType
+                            word.lastChangeDade = Date()
                             $0.items.append(word)
                         }
                     }

@@ -35,11 +35,14 @@ struct WordCardView: View {
             if isNeedTranslate {
                 Text(word.rusValue)
             }
+            Spacer()
+            Text("\(word.showTranslateCount) / \(word.appearancesConut)")
             
             Spacer()
                 
             Button(action: {
                 isNeedTranslate.toggle()
+                word.save { $0.showTranslateCount = $0.showTranslateCount + 1 }
             }) {
                 Text("Translate")
                     .frame(minWidth: 0, maxWidth: .infinity)
@@ -56,6 +59,10 @@ struct WordCardView: View {
             
             Button(action: {
                 word = group.items.randomElement() ?? Word()
+                word.save {
+                    $0.appearancesConut = $0.appearancesConut + 1
+                    $0.lastChangeDade = Date.now
+                }
                 isNeedTranslate = false
             }) {
                 Text("Next")

@@ -60,6 +60,20 @@ final class Word: Object, ObjectKeyIdentifiable {
     @Persisted var engValue: String = "Some word"
     
     @Persisted var rareTypeValue: Int = RareType.normal.rawValue
+    
+    //Дата создания
+    @Persisted var createDate: Date = Date()
+    //Дата последнего изменения
+    @Persisted var lastChangeDade: Date = Date()
+    //Общее колицество показов
+    @Persisted var appearancesConut: Int = 0
+    
+    //Количество показов переводов, на экране карточки (пользователь нажал на кнопку "перевести")
+    @Persisted var showTranslateCount: Int = 0
+    
+    //Признак того что это слова больше не показывать
+    @Persisted var isNoShowAnymore: Bool = false
+    
     var rareType: RareType {
         get {
             RareType(rawValue: rareTypeValue) ?? .normal
